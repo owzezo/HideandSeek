@@ -49,20 +49,19 @@ public class PawnController : EntityComponent<Pawn>
 		{
 			DoJump();
 		}
-if(Grounded){
-	amountOfJumps = 0;
-}
+		if(Grounded){
+			amountOfJumps = 0;
+		}
 
-if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
-	if(amountOfJumps <1 ){
-	amountOfJumps++;
-	doAirJump();
-	
-	Log.Info("Aantal jumps:" + amountOfJumps);
-	}
+		if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
+			if(amountOfJumps <1 ){
+			amountOfJumps++;
+			doAirJump();
+			Log.Info("Aantal jumps:" + amountOfJumps);
+			}
 
 
-}
+		}
 
 
 		var mh = new MoveHelper( Entity.Position, Entity.Velocity );
@@ -82,9 +81,9 @@ if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
 	}
 
 
-void doAirJump() {
-	Entity.Velocity = ApplyJump( Entity.Velocity, "jump" );
-}
+	void doAirJump() {
+		Entity.Velocity = ApplyJump( Entity.Velocity, "jump" );
+	}
 	void DoJump()
 	{
 		if ( Grounded )
@@ -111,7 +110,7 @@ void doAirJump() {
 
 	Vector3 ApplyFriction( Vector3 input, float frictionAmount )
 	{
-		float StopSpeed = 100.0f;
+		float StopSpeed = 200.0f;
 
 		var speed = input.Length;
 		if ( speed < 0.1f ) return input;
