@@ -56,7 +56,7 @@ if(Grounded){
 if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
 	if(amountOfJumps <1 ){
 	amountOfJumps++;
-	bigJump();
+	doAirJump();
 	
 	Log.Info("Aantal jumps:" + amountOfJumps);
 	}
@@ -82,7 +82,7 @@ if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
 	}
 
 
-void bigJump() {
+void doAirJump() {
 	Entity.Velocity = ApplyJump( Entity.Velocity, "jump" );
 }
 	void DoJump()
