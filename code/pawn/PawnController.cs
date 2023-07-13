@@ -11,6 +11,10 @@ public class PawnController : EntityComponent<Pawn>
 	public int JumpSpeed => 300;
 	public float Gravity => 800f;
 
+	public int maxJumps = 1;
+
+	public int amountOfJumps = 0;
+
 	HashSet<string> ControllerEvents = new( StringComparer.OrdinalIgnoreCase );
 
 	bool Grounded => Entity.GroundEntity.IsValid();
@@ -45,6 +49,21 @@ public class PawnController : EntityComponent<Pawn>
 		{
 			DoJump();
 		}
+if(Grounded){
+	amountOfJumps = 0;
+}
+
+if(Input.Pressed("jump") && !Grounded && (amountOfJumps < maxJumps)) {
+	if(amountOfJumps <1 ){
+	amountOfJumps++;
+	bigJump();
+	
+	Log.Info("Aantal jumps:" + amountOfJumps);
+	}
+
+
+}
+
 
 		var mh = new MoveHelper( Entity.Position, Entity.Velocity );
 		mh.Trace = mh.Trace.Size( Entity.Hull ).Ignore( Entity );
@@ -62,6 +81,10 @@ public class PawnController : EntityComponent<Pawn>
 		Entity.GroundEntity = groundEntity;
 	}
 
+
+void bigJump() {
+	Entity.Velocity = ApplyJump( Entity.Velocity, "jump" );
+}
 	void DoJump()
 	{
 		if ( Grounded )
